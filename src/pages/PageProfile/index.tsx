@@ -10,8 +10,6 @@ import { getShortAddress } from "utils/network";
 
 import "./styles.scss";
 
-interface Props {}
-
 export const PageProfile = () => {
     const { chainId, currentAddress } = useContext(StateContext);
     const { isLoading: isContributeLoading, start: startContributeLoader, stop: stopContributeLoader } = useLoader();
@@ -20,6 +18,8 @@ export const PageProfile = () => {
     const lvlStartXP = 68637;
     const lvlEndXP = 81961;
     const percent = ((currentXP - lvlStartXP) / (lvlEndXP - lvlStartXP)) * 100;
+
+    const nftUrl = "/images/NFT-test.png";
 
     const handleContribute = async () => {
         if (chainId) {
@@ -37,6 +37,9 @@ export const PageProfile = () => {
     return (
         <GradientBorder borderRadius={24} className="contribute-container">
             <div className="contribute">
+                <GradientBorder borderRadius={80} className="contribute__nft-image">
+                    <img src={nftUrl} />
+                </GradientBorder>
                 <div className="contribute__title">DAO Profile</div>
 
                 {currentAddress && (

@@ -15,3 +15,4 @@ export { ReactComponent as DisconnectIcon } from "./disconnect.svg";
 export { ReactComponent as ConnectedIcon } from "./connected.svg";
 export { ReactComponent as XPIcon } from "./XP.svg";
 export { ReactComponent as LvlIcon } from "./lvl.svg";
+export { ReactComponent as DAOIcon } from "./dao.svg";

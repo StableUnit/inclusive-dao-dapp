@@ -12,6 +12,22 @@
     background: $black;
     width: 394px;
     border-radius: 24px;
+    position: relative;
+
+    &__nft-image {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 80px;
+        overflow: hidden;
+
+        img {
+            width: 160px;
+            height: 160px;
+            border-radius: 80px !important;
+        }
+    }
 
     &__title {
         font-weight: 700;
@@ -42,7 +58,7 @@
     &__button {
         &-container {
             width: calc(100% - 16px);
-            margin: 30px auto 0 auto;
+            margin: 40px auto 0 auto;
         }
     }
 
