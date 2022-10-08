@@ -138,7 +138,6 @@ export const App = React.memo(() => {
                 <div className={cn("App__scroller", { "App__scroller--disabled": isNotSupportedChain })}>
                     <Routes />
                 </div>
-                <Footer />
             </div>
             <NetworkModal />
         </div>
