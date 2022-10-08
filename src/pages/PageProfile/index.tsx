@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 
 import { useLoader } from "hooks";
-import { ButtonGradient, GradientBorder, GradientHref } from "ui-kit";
+import { ButtonGradient, GradientBorder, GradientHref, ProgressBar } from "ui-kit";
 import { Input } from "components/Input";
 import { StateContext } from "reducer/constants";
 import { LvlIcon } from "ui-kit/images/icons";
@@ -14,15 +14,17 @@ interface Props {}
 
 export const PageProfile = () => {
     const { chainId, currentAddress } = useContext(StateContext);
-    const [contributeAddress, setContributeAddress] = useState<string>();
-    const [contributeValue, setContributeValue] = useState<number>();
     const { isLoading: isContributeLoading, start: startContributeLoader, stop: stopContributeLoader } = useLoader();
+
+    const currentXP = 77555;
+    const lvlStartXP = 68637;
+    const lvlEndXP = 81961;
+    const percent = ((currentXP - lvlStartXP) / (lvlEndXP - lvlStartXP)) * 100;
 
     const handleContribute = async () => {
         if (chainId) {
             try {
                 startContributeLoader();
-                console.log(contributeAddress, contributeValue);
                 addSuccessNotification("Contribute finished successfully");
                 stopContributeLoader();
             } catch (e) {
@@ -41,7 +43,13 @@ export const PageProfile = () => {
                     <GradientHref className="contribute__address">{getShortAddress(currentAddress)}</GradientHref>
                 )}
 
-                <Input text="Level in the DAO" value={0} Icon={LvlIcon} />
+                <Input text="Level in the DAO" value={19} Icon={LvlIcon} />
+
+                <div className="contribute__progress-bar__title">Experience points</div>
+                <ProgressBar className="contribute__progress-bar" percent={percent} />
+                <div className="contribute__progress-bar__description">
+                    {lvlEndXP - currentXP} XP left for leveling up
+                </div>
 
                 <ButtonGradient
                     className="contribute__button"

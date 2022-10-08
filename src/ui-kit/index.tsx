@@ -10,3 +10,4 @@ export { NetworkChanger } from "./components/NetworkChanger";
 export { NetworkImage } from "./components/NetworkImage";
 export { SocialNetwork } from "./components/SocialNetwork";
 export { Tooltip } from "./components/Tooltip";
+export { ProgressBar } from "./components/ProgressBar";

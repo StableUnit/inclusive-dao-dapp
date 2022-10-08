@@ -1,0 +1,16 @@
+@import "../../styles/vars";
+
+.progress-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 19px;
+  background: $dark-green;
+  border-radius: 12px;
+}
+
+.progress-bar {
+  border-radius: 12px;
+  height: 19px;
+  background: $gradient;
+}

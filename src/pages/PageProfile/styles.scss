@@ -26,10 +26,23 @@
         font-weight: bold;
     }
 
+    &__progress-bar {
+        margin: 8px;
+
+        &__title {
+            font-weight: bold;
+            padding-left: 8px;
+            text-align: left;
+        }
+        &__description {
+            font-weight: bold;
+        }
+    }
+
     &__button {
         &-container {
             width: calc(100% - 16px);
-            margin: 40px auto 0 auto;
+            margin: 30px auto 0 auto;
         }
     }
 
