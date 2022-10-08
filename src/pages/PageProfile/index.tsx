@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 
 import { useLoader } from "hooks";
-import { ButtonGradient, GradientBorder, GradientHref, ProgressBar } from "ui-kit";
+import { ButtonGradient, GradientBorder, GradientHref, ProgressBar, Tooltip } from "ui-kit";
 import { Input } from "components/Input";
 import { StateContext } from "reducer/constants";
 import { LvlIcon } from "ui-kit/images/icons";
@@ -22,16 +22,7 @@ export const PageProfile = () => {
     const nftUrl = "/images/NFT-test.png";
 
     const handleContribute = async () => {
-        if (chainId) {
-            try {
-                startContributeLoader();
-                addSuccessNotification("Contribute finished successfully");
-                stopContributeLoader();
-            } catch (e) {
-                addErrorNotification("Contribute error", e.message);
-                stopContributeLoader();
-            }
-        }
+        window.open("https://discord.gg/puMeUhUpJf", "_blank");
     };
 
     return (
@@ -53,6 +44,20 @@ export const PageProfile = () => {
                 <div className="contribute__progress-bar__description">
                     {lvlEndXP - currentXP} XP left for leveling up
                 </div>
+
+                <div className="contribute__mcap__title">
+                    Marketcap requirement to transfer&nbsp;
+                    <Tooltip id="contribute-transfer-tooltip">
+                        <span>
+                            To be able to transfer your NFT, the suDAO token's market capitalization should be higher
+                            than the amount displayed.
+                            <br />
+                            The higher your level, the lower the requirement.
+                        </span>
+                    </Tooltip>
+                </div>
+
+                <div className="contribute__mcap__description">10 000 000</div>
 
                 <ButtonGradient
                     className="contribute__button"

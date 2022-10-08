@@ -12,6 +12,7 @@ export const ProgressBar = ({ className, percent }: Props) => {
     return (
         <div className={cn("progress-bar-container", className)}>
             <div className="progress-bar" style={{ width: `${percent}%` }} />
+            <div className="progress-bar__percent">{percent.toFixed(1)}%</div>
         </div>
     );
 };

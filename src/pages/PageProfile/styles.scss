@@ -55,10 +55,28 @@
         }
     }
 
+    &__mcap {
+        &__title {
+            padding-top: 20px;
+            font-weight: bold;
+            padding-left: 8px;
+            text-align: left;
+
+            display: flex;
+            align-items: center;
+        }
+
+        &__description {
+            color: $green;
+            font-size: 32px;
+            font-weight: bold;
+        }
+    }
+
     &__button {
         &-container {
             width: calc(100% - 16px);
-            margin: 40px auto 0 auto;
+            margin: 30px auto 0 auto;
         }
     }
 
@@ -66,5 +84,10 @@
         padding: 15px 8px;
         width: 100%;
     }
+}
+
+#contribute-transfer-tooltip {
+    text-align: left;
+    width: 200px;
 }
 
