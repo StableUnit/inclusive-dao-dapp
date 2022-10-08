@@ -1,19 +1,24 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
-import Web3 from "web3";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import { PageReward } from "pages/PageReward";
-
-interface Props {
-    onConnect: () => void;
-    web3: Web3;
-}
+import { PageProfile } from "pages/PageProfile";
 
 export const Routes = () => (
     <Switch>
         {/* @ts-ignore */}
         <Route exact path="/reward">
             <PageReward />
+        </Route>
+
+        {/* @ts-ignore */}
+        <Route exact path="/profile">
+            <PageProfile />
+        </Route>
+
+        {/* @ts-ignore */}
+        <Route exact path="/">
+            <Redirect to="/profile" />
         </Route>
     </Switch>
 );

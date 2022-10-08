@@ -5,7 +5,7 @@ import { isFloat } from "utils/number";
 import "./styles.scss";
 
 interface Props {
-    onChange: (newValue?: number) => void;
+    onChange?: (newValue?: number) => void;
     value?: number;
     text: string;
     Icon: FunctionComponent<SVGProps<SVGSVGElement>>;
@@ -22,6 +22,9 @@ export const Input = ({ onChange, value, Icon, text }: Props) => {
     }, [value, userDefinedValue]);
 
     const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!onChange) {
+            return;
+        }
         const newValue = e.target.value;
         if (!newValue) {
             setUserDefinedValue(undefined);
@@ -38,7 +41,13 @@ export const Input = ({ onChange, value, Icon, text }: Props) => {
                 <Icon />
                 <div className="input__text">{text}</div>
             </div>
-            <input className="input__input" value={userDefinedValue} onChange={handleValueChange} placeholder="0" />
+            <input
+                disabled={!onChange}
+                className="input__input"
+                value={userDefinedValue}
+                onChange={handleValueChange}
+                placeholder="0"
+            />
         </div>
     );
 };

@@ -98,14 +98,6 @@ export const Header = ({ onConnect, onDisconnect }: HeaderProps) => {
                                 );
                             })}
                         </div>
-                        {chainId && (
-                            <NavLink to="/analytics">
-                                <ButtonGray className="header__statistics">
-                                    <StatsIcon />
-                                    <span>Statistics</span>
-                                </ButtonGray>
-                            </NavLink>
-                        )}
                         <NetworkChanger onClick={openNetworkModal} />
                     </>
                 )}
