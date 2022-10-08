@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { ButtonGradient, GradientBorder, GradientHref, ProgressBar, Tooltip } from "ui-kit";
 import { Input } from "components/Input";
 import { GovernanceChart } from "components/GovernanceChart";
+import CONTRACT_ERC20 from "contracts/ERC20.json";
 import { StateContext } from "reducer/constants";
 import { LvlIcon } from "ui-kit/images/icons";
 import { getShortAddress } from "utils/network";
@@ -10,7 +11,7 @@ import { getShortAddress } from "utils/network";
 import "./styles.scss";
 
 export const PageProfile = () => {
-    const { currentAddress } = useContext(StateContext);
+    const { currentAddress, web3 } = useContext(StateContext);
 
     const currentXP = 77555;
     const lvlStartXP = 68637;
@@ -22,6 +23,20 @@ export const PageProfile = () => {
     const handleContribute = async () => {
         window.open("https://discord.gg/puMeUhUpJf", "_blank");
     };
+
+    // Alex, this is example of balanceOf request
+    const getContractInfo = async () => {
+        if (currentAddress && web3) {
+            const tokenAddress = "0xfffffffff615bee8d0c7d329ebe0d444ab46ee5a";
+            const contract = new web3.eth.Contract(CONTRACT_ERC20 as any, tokenAddress);
+            const balance = await contract.methods.balanceOf(currentAddress).call();
+            console.log(balance);
+        }
+    };
+
+    useEffect(() => {
+        getContractInfo();
+    }, [currentAddress, web3]);
 
     return (
         <div className="profile-page">

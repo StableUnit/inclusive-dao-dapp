@@ -116,12 +116,13 @@ export const App = React.memo(() => {
         const newWeb3: Web3 = new Web3(provider);
         setUtilsWeb3(newWeb3);
         setWeb3(newWeb3);
+        dispatch({ type: Actions.SetWeb3, payload: newWeb3 });
 
-        const accounts = await web3.eth.getAccounts();
+        const accounts = await newWeb3.eth.getAccounts();
         dispatch({ type: Actions.SetCurrentAddress, payload: accounts[0] });
         setUtilsCurrentAddress(accounts[0]);
 
-        const newChainId = await web3.eth.getChainId();
+        const newChainId = await newWeb3.eth.getChainId();
         dispatch({ type: Actions.SetChainId, payload: newChainId });
     };
 
