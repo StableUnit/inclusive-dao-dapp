@@ -11,7 +11,7 @@ import { getShortAddress } from "utils/network";
 import "./styles.scss";
 
 export const PageProfile = () => {
-    const { currentAddress, web3 } = useContext(StateContext);
+    const { currentAddress, web3, web3auth } = useContext(StateContext);
 
     const currentXP = 77555;
     const lvlStartXP = 68637;
@@ -21,7 +21,9 @@ export const PageProfile = () => {
     const nftUrl = "/images/NFT-test.png";
 
     const handleContribute = async () => {
-        window.open("https://discord.gg/puMeUhUpJf", "_blank");
+        const info = await web3auth?.getUserInfo();
+        console.log(info);
+        // window.open("https://discord.gg/puMeUhUpJf", "_blank");
     };
 
     // Alex, this is example of balanceOf request
