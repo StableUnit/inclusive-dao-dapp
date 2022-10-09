@@ -28,6 +28,13 @@
         }
     }
 
+    &__real-address {
+        font-size: 10px;
+        text-align: center;
+        margin-top: -15px;
+        color: $gray1;
+    }
+
     & &__address {
         width: 352px;
         margin: 20px 0;

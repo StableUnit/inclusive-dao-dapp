@@ -1,5 +1,6 @@
 import Web3 from "web3";
 import BigNumber from "bignumber.js";
+import { ethers } from "ethers";
 
 import CONTRACT_ERC20 from "contracts/ERC20.json";
 
@@ -30,3 +31,8 @@ export const CommonFactory = {
         return new BigNumber(await tokenContract.methods.balanceOf(currentAddress).call());
     },
 };
+
+export const isAddress = (address?: string) => address?.startsWith("0x") || address?.includes(".eth");
+
+export const ensToAddress = async (ens?: string) =>
+    ens?.includes(".eth") ? ethers.providers.getDefaultProvider().resolveName(ens) : ens;
