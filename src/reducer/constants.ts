@@ -6,6 +6,7 @@ export const initialState: ReducerState = {
     chainId: undefined,
     currentAddress: undefined,
     isNetworkModalVisible: false,
+    web3auth: null,
     web3: undefined,
 };
 
