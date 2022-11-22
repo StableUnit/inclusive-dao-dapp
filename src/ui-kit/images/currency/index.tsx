@@ -1,4 +1,4 @@
-export { ReactComponent as SuUsdIcon } from "./suUSD.svg";
+export { ReactComponent as UsdProIcon } from "./USDPro.svg";
 export { ReactComponent as EthIcon } from "./ETH.svg";
 export { ReactComponent as SHIBIcon } from "./SHIB.svg";
 export { ReactComponent as OneInchIcon } from "./1inch.svg";
