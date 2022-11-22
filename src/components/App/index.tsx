@@ -4,8 +4,6 @@ import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
 import cn from "classnames";
-import { Web3Auth } from "@web3auth/web3auth";
-import { CHAIN_NAMESPACES, SafeEventEmitterProvider } from "@web3auth/base";
 
 import { Actions } from "reducer";
 import { DispatchContext, StateContext } from "reducer/constants";
@@ -23,6 +21,7 @@ import {
 import { Routes } from "../Routes";
 import { Header } from "../Header";
 import { NetworkModal } from "../NetworkModal";
+import { Footer } from "../Footer";
 
 import "./styles.scss";
 
@@ -79,20 +78,17 @@ const web3Modal = new Web3Modal({
     },
 });
 
-const clientId = "BJdx67jqg-GH8fGTkhWy0LYbsszrAxWGiF2IGnCbg7smdhP0K11EbFHqV26SBZctnemMJvXxPhAjEoOBdWYQZxA";
-
 export const App = React.memo(() => {
     const [web3, setWeb3] = useState(new Web3(Web3.givenProvider));
-    const { chainId, web3auth } = useContext(StateContext);
+    const { chainId } = useContext(StateContext);
     const dispatch = useContext(DispatchContext);
 
     const onDisconnect = async () => {
-        if (!web3auth) {
-            console.log("web3auth not initialized yet");
-            return;
+        // @ts-ignore
+        if (web3 && web3.currentProvider && web3.currentProvider.close) {
+            // @ts-ignore
+            await web3.currentProvider.close();
         }
-        await web3auth.logout();
-        // setProvider(null);
         dispatch({ type: Actions.SetCurrentAddress, payload: undefined });
         dispatch({ type: Actions.SetChainId, payload: undefined });
         await web3Modal.clearCachedProvider();
@@ -114,26 +110,10 @@ export const App = React.memo(() => {
         });
     };
     const onConnect = async () => {
-        const newWeb3auth = new Web3Auth({
-            clientId,
-            chainConfig: {
-                chainNamespace: CHAIN_NAMESPACES.EIP155,
-                chainId: "0x89",
-                rpcTarget: "https://polygon-rpc.com/",
-            },
-        });
+        const provider = await web3Modal.connect();
+        await subscribeProvider(provider);
 
-        dispatch({ type: Actions.SetWeb3Auth, payload: newWeb3auth });
-
-        await newWeb3auth.initModal();
-        // if (newWeb3auth.provider) {
-        //     setProvider(newWeb3auth.provider);
-        // }
-        const web3authProvider = await newWeb3auth.connect();
-        // setProvider(web3authProvider);
-        await subscribeProvider(web3authProvider);
-
-        const newWeb3: Web3 = new Web3(web3authProvider as any);
+        const newWeb3: Web3 = new Web3(provider);
         setUtilsWeb3(newWeb3);
         setWeb3(newWeb3);
         dispatch({ type: Actions.SetWeb3, payload: newWeb3 });

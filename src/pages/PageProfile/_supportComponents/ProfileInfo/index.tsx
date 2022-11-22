@@ -11,7 +11,7 @@ import { getShortAddress } from "utils/network";
 import "./styles.scss";
 
 export const ProfileInfo = () => {
-    const { currentAddress, web3, web3auth } = useContext(StateContext);
+    const { currentAddress, web3 } = useContext(StateContext);
 
     const currentXP = 77555;
     const lvlStartXP = 68637;
@@ -21,8 +21,6 @@ export const ProfileInfo = () => {
     const nftUrl = "/images/NFT-test.png";
 
     const handleContribute = async () => {
-        const info = await web3auth?.getUserInfo();
-        console.log(info);
         window.open("https://discord.gg/puMeUhUpJf", "_blank");
     };
 
