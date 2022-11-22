@@ -33,6 +33,7 @@ export const GovernanceChart = () => {
             >
                 <XAxis dataKey="name" />
                 <YAxis />
+                {/* @ts-ignore */}
                 <Line type="monotone" dot={null} dataKey="value" stroke="red" />
             </LineChart>
         </InfoContainer>

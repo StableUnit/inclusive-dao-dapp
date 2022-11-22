@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SuUsdIcon, OneInchIcon, WBTCIcon, UsdtIcon, SHIBIcon, EthIcon } from "ui-kit/images/currency";
+import { UsdProIcon, OneInchIcon, WBTCIcon, UsdtIcon, SHIBIcon, EthIcon } from "ui-kit/images/currency";
 import { TokenMetadata } from "./types";
 
 export type SupportedTokensType = "WETH" | "WBTC" | "USDT" | "1INCH" | "SHIB" | "SuUSD";
@@ -20,7 +20,7 @@ export const getTokenIcon = (tokenName: SupportedTokensType) => {
         case "SHIB":
             return <SHIBIcon />;
         case "SuUSD":
-            return <SuUsdIcon />;
+            return <UsdProIcon />;
         default:
             return null;
     }
