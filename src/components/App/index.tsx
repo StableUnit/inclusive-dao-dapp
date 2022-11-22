@@ -7,7 +7,7 @@ import cn from "classnames";
 
 import { Actions } from "reducer";
 import { DispatchContext, StateContext } from "reducer/constants";
-import { setUtilsCurrentAddress, setUtilsWeb3 } from "utils/api";
+import { initAllContracts, setUtilsCurrentAddress, setUtilsWeb3 } from "utils/api";
 import {
     DEFAULT_NETWORK,
     getIdByNetworkName,
@@ -114,6 +114,7 @@ export const App = React.memo(() => {
         await subscribeProvider(provider);
 
         const newWeb3: Web3 = new Web3(provider);
+        initAllContracts(newWeb3);
         setUtilsWeb3(newWeb3);
         setWeb3(newWeb3);
         dispatch({ type: Actions.SetWeb3, payload: newWeb3 });

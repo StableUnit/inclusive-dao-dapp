@@ -1,9 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 
 import { ButtonGradient, GradientBorder, GradientHref, ProgressBar, Tooltip } from "ui-kit";
+import { useBonusLevel, useBonusLevelBounds, useBonusXP } from "hooks";
 import { Input } from "components/Input";
-import { GovernanceChart } from "components/GovernanceChart";
-import CONTRACT_ERC20 from "contracts/ERC20.json";
 import { StateContext } from "reducer/constants";
 import { LvlIcon } from "ui-kit/images/icons";
 import { getShortAddress } from "utils/network";
@@ -11,11 +10,11 @@ import { getShortAddress } from "utils/network";
 import "./styles.scss";
 
 export const ProfileInfo = () => {
-    const { currentAddress, web3 } = useContext(StateContext);
+    const { currentAddress } = useContext(StateContext);
 
-    const currentXP = 77555;
-    const lvlStartXP = 68637;
-    const lvlEndXP = 81961;
+    const currentXP = useBonusXP();
+    const currentLevel = useBonusLevel();
+    const [lvlStartXP, lvlEndXP] = useBonusLevelBounds(currentLevel ?? 1);
     const percent = ((currentXP - lvlStartXP) / (lvlEndXP - lvlStartXP)) * 100;
 
     const nftUrl = "/images/NFT-test.png";
@@ -23,20 +22,6 @@ export const ProfileInfo = () => {
     const handleContribute = async () => {
         window.open("https://discord.gg/puMeUhUpJf", "_blank");
     };
-
-    // Alex, this is example of balanceOf request
-    const getContractInfo = async () => {
-        if (currentAddress && web3) {
-            const tokenAddress = "0xfffffffff615bee8d0c7d329ebe0d444ab46ee5a";
-            const contract = new web3.eth.Contract(CONTRACT_ERC20 as any, tokenAddress);
-            const balance = await contract.methods.balanceOf(currentAddress).call();
-            console.log(balance);
-        }
-    };
-
-    useEffect(() => {
-        getContractInfo();
-    }, [currentAddress, web3]);
 
     return (
         <GradientBorder borderRadius={24} className="contribute-container">
@@ -50,7 +35,7 @@ export const ProfileInfo = () => {
                     <GradientHref className="contribute__address">{getShortAddress(currentAddress)}</GradientHref>
                 )}
 
-                <Input text="Level in the DAO" value={19} Icon={LvlIcon} />
+                <Input text="Level in the DAO" value={currentLevel} Icon={LvlIcon} />
 
                 <div className="contribute__progress-bar__title">Experience points</div>
                 <ProgressBar className="contribute__progress-bar" percent={percent} />

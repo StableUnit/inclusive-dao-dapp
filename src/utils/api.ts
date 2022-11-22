@@ -1,8 +1,22 @@
 import Web3 from "web3";
-import BigNumber from "bignumber.js";
 import { ethers } from "ethers";
 
-import CONTRACT_ERC20 from "contracts/ERC20.json";
+import { Contract } from "web3-eth-contract";
+import BONUS from "submodule-artifacts/goerli/Bonus.json";
+
+type ContractsType = "BonusContract";
+
+export const contracts: Record<ContractsType, Contract | undefined> = {
+    BonusContract: undefined,
+};
+
+export const initAllContracts = (web3: Web3) => {
+    setBonusContract(new web3.eth.Contract(BONUS.abi as any, BONUS.address));
+};
+
+export const setBonusContract = (newContract: Contract) => {
+    contracts.BonusContract = newContract;
+};
 
 let currentAddress: string;
 export const setUtilsCurrentAddress = (newAddress: string) => {
@@ -14,21 +28,27 @@ export const setUtilsWeb3 = (newWeb3: Web3) => {
     web3 = newWeb3;
 };
 
-export const CommonFactory = {
-    createCurrencyContract: (address: string) => {
-        const newWeb3 = web3 ?? new Web3(Web3.givenProvider);
-        if (newWeb3 && address) {
-            return new newWeb3.eth.Contract(CONTRACT_ERC20 as any, address);
+export const BonusFactory = {
+    getLevel: async () => {
+        if (currentAddress && contracts.BonusContract) {
+            return contracts.BonusContract.methods.getLevel(currentAddress).call();
         }
         return undefined;
     },
-    balance: async (tokenAddress?: string) => {
-        if (!web3 || !tokenAddress || !currentAddress) {
-            return new BigNumber(0);
+    getXP: async () => {
+        if (currentAddress && contracts.BonusContract) {
+            const userInfo = await contracts.BonusContract.methods.userInfo(currentAddress).call();
+            return +userInfo.xp;
         }
-
-        const tokenContract = new web3.eth.Contract(CONTRACT_ERC20 as any, tokenAddress);
-        return new BigNumber(await tokenContract.methods.balanceOf(currentAddress).call());
+        return undefined;
+    },
+    getLevelBounds: async (level: number) => {
+        if (level && contracts.BonusContract) {
+            const lowerBound = await contracts.BonusContract.methods.levelMap(level - 1).call();
+            const upperBound = await contracts.BonusContract.methods.levelMap(level).call();
+            return [lowerBound, upperBound] as number[];
+        }
+        return undefined;
     },
 };
 

@@ -1,13 +1,4 @@
-const folders = [
-    "components",
-    "contracts",
-    "hooks",
-    "pages",
-    "reducer",
-    "submodule-contract-artifacts",
-    "ui-kit",
-    "utils",
-];
+const folders = ["components", "contracts", "hooks", "pages", "reducer", "submodule-artifacts", "ui-kit", "utils"];
 /** Разрешенные импорты (для сортировки) */
 const ALLOWED_PATH_GROUPS = folders.map((folder) => ({
     pattern: `${folder}/**`,

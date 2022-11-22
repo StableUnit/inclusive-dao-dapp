@@ -27,8 +27,8 @@ export const LevelDetails = () => {
                 </div>
                 <div className="level-details__subtitle">Perks</div>
                 <div className="level-details__perks">
-                    {perks.map((perk) => (
-                        <Perk className="level-details__perk" image={perk} />
+                    {perks.map((perk, i) => (
+                        <Perk key={`${perk}-${i}`} className="level-details__perk" image={perk} />
                     ))}
                 </div>
             </div>

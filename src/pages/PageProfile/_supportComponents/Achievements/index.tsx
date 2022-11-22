@@ -18,8 +18,12 @@ export const Achievements = () => {
             <div className="achievements">
                 <div className="achievements__title">Achievements</div>
                 <div className="achievements__content">
-                    {achievements.map((achievement) => (
-                        <Achievement className="achievements__achievement" image={achievement} />
+                    {achievements.map((achievement, i) => (
+                        <Achievement
+                            key={`${achievement}-${i}`}
+                            className="achievements__achievement"
+                            image={achievement}
+                        />
                     ))}
                 </div>
             </div>
