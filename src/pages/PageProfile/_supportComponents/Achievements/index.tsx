@@ -8,7 +8,16 @@ import "./styles.scss";
 const MIN_ACHIEVEMENTS = 12;
 
 export const Achievements = () => {
-    let achievements = ["/images/Penguin1.png", "/images/Medal.png"];
+    let achievements = [
+        {
+            image: "/images/Penguin1.png",
+            text: "Real crypto penguin!",
+        },
+        {
+            image: "/images/Medal.png",
+            text: "Medal of honor",
+        },
+    ];
     if (achievements.length < MIN_ACHIEVEMENTS) {
         achievements = [...achievements, ...new Array(MIN_ACHIEVEMENTS - achievements.length).fill("")];
     }
@@ -22,7 +31,8 @@ export const Achievements = () => {
                         <Achievement
                             key={`${achievement}-${i}`}
                             className="achievements__achievement"
-                            image={achievement}
+                            image={achievement.image}
+                            text={achievement.text}
                         />
                     ))}
                 </div>
