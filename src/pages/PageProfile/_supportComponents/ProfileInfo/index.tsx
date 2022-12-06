@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 import { ButtonGradient, GradientBorder, GradientHref, ProgressBar, Tooltip } from "ui-kit";
-import { useBonusLevel, useBonusLevelBounds, useBonusXP } from "hooks";
+import { useLevel, useBonusLevelBounds, useBonusXP, useGoogleDocXP } from "hooks";
 import { Input } from "components/Input";
 import { StateContext } from "reducer/constants";
 import { LvlIcon } from "ui-kit/images/icons";
@@ -13,9 +13,11 @@ export const ProfileInfo = () => {
     const { currentAddress } = useContext(StateContext);
 
     const currentXP = useBonusXP();
-    const currentLevel = useBonusLevel();
+    const googleDocXP = useGoogleDocXP();
+    const userXP = currentXP + googleDocXP;
+    const currentLevel = useLevel(userXP);
     const [lvlStartXP, lvlEndXP] = useBonusLevelBounds(currentLevel ?? 1);
-    const percent = ((currentXP - lvlStartXP) / (lvlEndXP - lvlStartXP)) * 100;
+    const percent = ((userXP - lvlStartXP) / (lvlEndXP - lvlStartXP)) * 100;
 
     const nftUrl = "/images/NFT-test.png";
 
@@ -38,10 +40,8 @@ export const ProfileInfo = () => {
                 <Input text="Level in the DAO" value={currentLevel} Icon={LvlIcon} />
 
                 <div className="contribute__progress-bar__title">Experience points</div>
-                <ProgressBar className="contribute__progress-bar" percent={percent} />
-                <div className="contribute__progress-bar__description">
-                    {lvlEndXP - currentXP} XP left for leveling up
-                </div>
+                <ProgressBar className="contribute__progress-bar" percent={percent || 0} />
+                <div className="contribute__progress-bar__description">{lvlEndXP - userXP} XP left for leveling up</div>
 
                 <div className="contribute__mcap__title">
                     Marketcap requirement to transfer&nbsp;

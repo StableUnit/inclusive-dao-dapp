@@ -42,6 +42,13 @@ export const BonusFactory = {
         }
         return undefined;
     },
+    getLevelByXP: async (xp: number) => {
+        if (currentAddress && contracts.BonusContract) {
+            console.log(xp);
+            return contracts.BonusContract.methods.getLevelByXP(xp).call();
+        }
+        return undefined;
+    },
     getLevelBounds: async (level: number) => {
         if (level && contracts.BonusContract) {
             const lowerBound = await contracts.BonusContract.methods.levelMap(level - 1).call();
