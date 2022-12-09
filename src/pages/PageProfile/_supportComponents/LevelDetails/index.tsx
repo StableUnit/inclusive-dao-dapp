@@ -1,6 +1,7 @@
 import React from "react";
 
 import { GradientBorder } from "ui-kit";
+import { useBonusXP, useGoogleDocXP, useLevel } from "hooks";
 import { Perk } from "../Perk";
 
 import "./styles.scss";
@@ -8,8 +9,10 @@ import "./styles.scss";
 const MIN_PERKS = 3;
 
 export const LevelDetails = () => {
-    const level = 15;
-    const xp = 84000;
+    const currentXP = useBonusXP();
+    const googleDocXP = useGoogleDocXP();
+    const userXP = currentXP + googleDocXP;
+    const currentLevel = useLevel(userXP);
 
     let perks = [""];
     if (perks.length < MIN_PERKS) {
@@ -21,9 +24,9 @@ export const LevelDetails = () => {
             <div className="level-details">
                 <div className="level-details__title">Level details and perks</div>
                 <div className="level-details__xp">
-                    You are level {level} and have accumulated
+                    You are level {currentLevel} and have accumulated
                     <br />
-                    <b>{xp.toLocaleString()}</b> XP.
+                    <b>{userXP.toLocaleString()}</b> XP.
                 </div>
                 <div className="level-details__subtitle">Perks</div>
                 <div className="level-details__perks">

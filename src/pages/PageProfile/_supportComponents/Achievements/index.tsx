@@ -11,11 +11,11 @@ export const Achievements = () => {
     let achievements = [
         {
             image: "/images/Penguin1.png",
-            text: "Real crypto penguin!",
+            text: "Coming soon",
         },
         {
             image: "/images/Medal.png",
-            text: "Medal of honor",
+            text: "Coming soon",
         },
     ];
     if (achievements.length < MIN_ACHIEVEMENTS) {

@@ -4,7 +4,7 @@ import { GoogleSpreadsheet, GoogleSpreadsheetWorksheet } from "google-spreadshee
 import { StateContext } from "reducer/constants";
 
 const spreadsheetId = "105MZ252jzyf53ncgMrCxNjeTAVmlpZAMwqZWo3tDQck";
-const rowCount = 60;
+const rowCount = 70;
 
 export const useGoogleDocXP = () => {
     const { currentAddress } = useContext(StateContext);
