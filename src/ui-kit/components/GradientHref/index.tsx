@@ -12,14 +12,24 @@ interface GradientBorderProps {
     href?: string;
     children: React.ReactNode;
     onClick?: () => void;
+    isExternal?: boolean;
 }
 
-export const GradientHref = ({ id, children, className, target, disabled, href, onClick }: GradientBorderProps) => {
+export const GradientHref = ({
+    id,
+    children,
+    isExternal = false,
+    className,
+    target,
+    disabled,
+    href,
+    onClick,
+}: GradientBorderProps) => {
     return href ? (
         <NavLink
             id={id}
             onClick={onClick}
-            to={href}
+            to={isExternal ? { pathname: href } : href}
             target={target}
             rel="noreferrer"
             className={cn("gradient-href", className, { "gradient-href--disabled": disabled })}
@@ -29,6 +39,7 @@ export const GradientHref = ({ id, children, className, target, disabled, href, 
         </NavLink>
     ) : (
         <div
+            onClick={onClick}
             id={id}
             className={cn("gradient-href gradient-href-text", className, { "gradient-href--disabled": disabled })}
         >

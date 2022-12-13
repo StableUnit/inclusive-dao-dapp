@@ -4,12 +4,12 @@ import { StateContext } from "reducer/constants";
 import { toHRNumber } from "utils/bigNumber";
 import { BonusFactory } from "utils/api";
 
-export const useLevel = (xp: number) => {
+export const useLevel = (xp?: number) => {
     const { currentAddress } = useContext(StateContext);
     const [level, setLevel] = useState<number>();
 
     const updateData = async () => {
-        if (currentAddress && xp) {
+        if (currentAddress && xp !== undefined) {
             const level2 = await BonusFactory.getLevelByXP(xp);
             setLevel(level2);
         } else {

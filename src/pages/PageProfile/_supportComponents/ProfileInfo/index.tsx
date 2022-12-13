@@ -17,7 +17,8 @@ export const ProfileInfo = () => {
     const userXP = currentXP + googleDocXP;
     const currentLevel = useLevel(userXP);
     const [lvlStartXP, lvlEndXP] = useBonusLevelBounds(currentLevel ?? 1);
-    const percent = ((userXP - lvlStartXP) / (lvlEndXP - lvlStartXP)) * 100;
+    const percent = Math.max(((userXP - lvlStartXP) / (lvlEndXP - lvlStartXP)) * 100, 0);
+    const xpLeft = Math.max(lvlEndXP - userXP, 0);
 
     const nftUrl = "/images/NFT-test.png";
 
@@ -41,7 +42,7 @@ export const ProfileInfo = () => {
 
                 <div className="contribute__progress-bar__title">Experience points</div>
                 <ProgressBar className="contribute__progress-bar" percent={percent || 0} />
-                <div className="contribute__progress-bar__description">{lvlEndXP - userXP} XP left for leveling up</div>
+                <div className="contribute__progress-bar__description">{xpLeft} XP left for leveling up</div>
 
                 <div className="contribute__mcap__title">
                     Marketcap requirement to transfer&nbsp;
@@ -60,6 +61,9 @@ export const ProfileInfo = () => {
                 <ButtonGradient className="contribute__button" onClick={handleContribute}>
                     Contribute
                 </ButtonGradient>
+                <GradientHref href="https://discord.gg/puMeUhUpJf" isExternal target="_blank">
+                    Earn XP points
+                </GradientHref>
             </div>
         </GradientBorder>
     );

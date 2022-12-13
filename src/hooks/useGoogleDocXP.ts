@@ -37,8 +37,10 @@ export const useGoogleDocXP = () => {
                 const cell = sheet.getCell(i, 0);
                 if (cell.value?.toString().toLowerCase() === currentAddress.toLowerCase()) {
                     setXP(+sheet.getCell(i, 1).value);
+                    return;
                 }
             }
+            setXP(0);
         } else {
             setXP(0);
         }

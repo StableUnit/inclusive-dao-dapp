@@ -44,7 +44,6 @@ export const BonusFactory = {
     },
     getLevelByXP: async (xp: number) => {
         if (currentAddress && contracts.BonusContract) {
-            console.log(xp);
             return contracts.BonusContract.methods.getLevelByXP(xp).call();
         }
         return undefined;
