@@ -23,7 +23,7 @@ export const ProfileInfo = () => {
     const nftUrl = "/images/NFT-test.png";
 
     const handleContribute = async () => {
-        window.open("https://discord.gg/puMeUhUpJf", "_blank");
+        window.open("https://discord.gg/jJMrk69uKs", "_blank");
     };
 
     return (
@@ -61,7 +61,7 @@ export const ProfileInfo = () => {
                 <ButtonGradient className="contribute__button" onClick={handleContribute}>
                     Contribute
                 </ButtonGradient>
-                <GradientHref href="https://discord.gg/puMeUhUpJf" isExternal target="_blank">
+                <GradientHref href="https://discord.gg/pBav7arkDZ" isExternal target="_blank">
                     Earn XP points
                 </GradientHref>
             </div>
