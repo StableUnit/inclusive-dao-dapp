@@ -17,13 +17,13 @@ export const ProfileInfo = () => {
     const userXP = currentXP + googleDocXP;
     const currentLevel = useLevel(userXP);
     const [lvlStartXP, lvlEndXP] = useBonusLevelBounds(currentLevel ?? 1);
-    const percent = Math.max(((userXP - lvlStartXP) / (lvlEndXP - lvlStartXP)) * 100, 0);
+    const percent = lvlEndXP === lvlStartXP ? 0 : Math.max(((userXP - lvlStartXP) / (lvlEndXP - lvlStartXP)) * 100, 0);
     const xpLeft = Math.max(lvlEndXP - userXP, 0);
 
     const nftUrl = "/images/NFT-test.png";
 
     const handleContribute = async () => {
-        window.open("https://discord.gg/jJMrk69uKs", "_blank");
+        window.open("https://discord.gg/pBav7arkDZ", "_blank");
     };
 
     return (
@@ -59,11 +59,8 @@ export const ProfileInfo = () => {
                 <div className="contribute__mcap__description">10 000 000</div>
 
                 <ButtonGradient className="contribute__button" onClick={handleContribute}>
-                    Contribute
+                    Get more XP
                 </ButtonGradient>
-                <GradientHref href="https://discord.gg/pBav7arkDZ" isExternal target="_blank">
-                    Earn XP points
-                </GradientHref>
             </div>
         </GradientBorder>
     );

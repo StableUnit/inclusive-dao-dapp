@@ -4,7 +4,7 @@ import { StateContext } from "reducer/constants";
 import { BonusFactory } from "utils/api";
 
 export const useBonusLevelBounds = (level: number) => {
-    const { currentAddress } = useContext(StateContext);
+    const { currentAddress, chainId } = useContext(StateContext);
     const [bounds, setBounds] = useState([0, 0]);
 
     const updateData = async () => {
@@ -17,7 +17,7 @@ export const useBonusLevelBounds = (level: number) => {
 
     useEffect(() => {
         updateData();
-    }, [level]);
+    }, [level, chainId]);
 
     return bounds;
 };

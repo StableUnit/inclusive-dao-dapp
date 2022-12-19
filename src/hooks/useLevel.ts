@@ -5,7 +5,7 @@ import { toHRNumber } from "utils/bigNumber";
 import { BonusFactory } from "utils/api";
 
 export const useLevel = (xp?: number) => {
-    const { currentAddress } = useContext(StateContext);
+    const { currentAddress, chainId } = useContext(StateContext);
     const [level, setLevel] = useState<number>();
 
     const updateData = async () => {
@@ -19,7 +19,7 @@ export const useLevel = (xp?: number) => {
 
     useEffect(() => {
         updateData();
-    }, [currentAddress, xp]);
+    }, [currentAddress, chainId, xp]);
 
     return level;
 };
