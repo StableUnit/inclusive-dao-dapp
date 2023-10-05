@@ -1,0 +1,29 @@
+@import "src/ui-kit/styles/vars";
+
+.sum-info {
+  height: 50px;
+  display: flex;
+  align-items: center;
+
+  &__info {
+    padding-left: 9px;
+    color: white;
+
+    &__title {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 22px;
+    }
+
+    &__description {
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 22px;
+      font-family: "Monaco", monospace;
+
+      @media (max-width: $mobile-width) {
+        font-size: 16px;
+      }
+    }
+  }
+}

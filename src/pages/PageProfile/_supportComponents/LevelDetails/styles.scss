@@ -1,0 +1,36 @@
+@import "src/ui-kit/styles/vars";
+
+.level-details {
+    text-align: center;
+    height: 495px;
+    padding: 24px 16px 1px;
+    box-sizing: border-box;
+    background: $black;
+    width: 394px;
+    border-radius: 24px;
+    position: relative;
+
+    &__title {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 26px;
+        color: white;
+        padding-bottom: 24px;
+    }
+
+    &__xp {
+        text-align: left;
+        margin-bottom: 40px;
+    }
+
+    &__subtitle {
+        padding-left: 16px;
+        font-weight: bold;
+        text-align: left;
+        padding-bottom: 10px;
+    }
+
+    &__perk {
+        margin-bottom: 21px;
+    }
+}
